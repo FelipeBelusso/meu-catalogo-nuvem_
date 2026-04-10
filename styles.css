@@ -1,0 +1,155 @@
+/* ===========================
+   Estilo Geral da Página
+=========================== */
+body {
+  font-family: "Inter", "Arial", sans-serif; /* moderna e clean */
+  background: #f4f6f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===========================
+   Header
+=========================== */
+header {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+header:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* ===========================
+   Grid de Produtos
+=========================== */
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  padding: 40px;
+}
+/* ===========================
+   fundo_admin
+=========================== */
+.fundo_admin {
+  background-color: #ffffff;
+  float: right;
+  width: 104px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+/* ===========================
+   Admin de produtos
+=========================== */
+.Admin_de_produtos {
+  text-align: right;
+  display: flex;
+  justify-content: right;
+  font-size: 5;
+  font-weight: 50;
+}
+/* ===========================
+   Cartões de Produto
+=========================== */
+.card-produto {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-produto::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    rgba(58, 123, 213, 0.2),
+    rgba(0, 210, 255, 0.2)
+  );
+  transform: rotate(25deg);
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+.card-produto:hover::before {
+  transform: rotate(0deg);
+}
+
+/* Imagem do Produto */
+.card-produto img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.card-produto img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
+
+/* Nome, Preço e Categoria */
+.card-produto h3 {
+  margin: 14px 0 8px;
+  color: #2c3e50;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.card-produto p {
+  margin: 5px 0;
+  color: #555;
+  position: relative;
+  z-index: 1;
+}
+
+.card-produto .categoria {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+/* Botão Futurista Suave */
+.card-produto button {
+  margin-top: 14px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.card-produto button:hover {
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
