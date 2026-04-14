@@ -2,7 +2,7 @@
    Estilo Geral da Página
 =========================== */
 body {
-  font-family: "Inter", "Arial", sans-serif; /* moderna e clean */
+  font-family: "Inter", "Arial", sans-serif;
   background: #f4f6f8;
   color: #333;
   margin: 0;
@@ -30,14 +30,70 @@ header:hover {
 }
 
 /* ===========================
+   Container Principal (Carrinho + Vitrine)
+=========================== */
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 20px 40px;
+}
+
+/* ===========================
+   Carrinho à esquerda (parado)
+=========================== */
+.carrinho-container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  color: #3a7bd5; /* azul nos textos do carrinho */
+  flex-shrink: 0; /* não encolhe */
+}
+
+.carrinho-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.carrinho-container ul li {
+  margin: 8px 0;
+  color: #3a7bd5;
+}
+
+/* Botões do carrinho */
+.carrinho-container button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carrinho-container button:hover {
+  background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
    Grid de Produtos
 =========================== */
 .grid-produtos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 28px;
-  padding: 40px;
+  flex: 1; /* ocupa o espaço restante ao lado do carrinho */
+  padding: 0;
+  color: #3a7bd5; /* azul nos textos adicionados dinamicamente */
 }
+
 /* ===========================
    fundo_admin
 =========================== */
@@ -47,6 +103,7 @@ header:hover {
   width: 104px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
 }
+
 /* ===========================
    Admin de produtos
 =========================== */
@@ -57,6 +114,7 @@ header:hover {
   font-size: 5;
   font-weight: 50;
 }
+
 /* ===========================
    Cartões de Produto
 =========================== */
@@ -69,6 +127,7 @@ header:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   position: relative;
   overflow: hidden;
+  color: #3a7bd5;
 }
 
 .card-produto::before {
@@ -110,27 +169,26 @@ header:hover {
 }
 
 /* Nome, Preço e Categoria */
-.card-produto h3 {
-  margin: 14px 0 8px;
-  color: #2c3e50;
-  font-weight: 600;
+.card-produto h3,
+.card-produto p,
+.card-produto .categoria {
   position: relative;
   z-index: 1;
+  color: #3a7bd5;
+}
+
+.card-produto h3 {
+  margin: 14px 0 8px;
+  font-weight: 600;
 }
 
 .card-produto p {
   margin: 5px 0;
-  color: #555;
-  position: relative;
-  z-index: 1;
 }
 
 .card-produto .categoria {
   font-size: 0.9em;
-  color: #7f8c8d;
   font-style: italic;
-  position: relative;
-  z-index: 1;
 }
 
 /* Botão Futurista Suave */
