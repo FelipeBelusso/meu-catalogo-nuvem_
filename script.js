@@ -3,6 +3,9 @@ const supabaseUrl = "https://jhmasrtapcjpcrvtpuki.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpobWFzcnRhcGNqcGNydnRwdWtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjEyMjYsImV4cCI6MjA4OTgzNzIyNn0.Ju0V8ECY2eBuspflyI8PwIjem0cASjbl3_LbtqwKc6o";
 
+// Tenta carregar o carrinho salvo no navegador, ou começa um vazio []
+let carrinho = JSON.parse(localStorage.getItem("meu_carrinho")) || [];
+
 // Inicia a conexão
 const banco = window.supabase.createClient(supabaseUrl, supabaseKey);
 
@@ -19,7 +22,7 @@ async function carregarCatalogo() {
   let vitrine = document.getElementById("vitrine");
   vitrine.innerHTML = ""; // Limpa a tela
 
-  // Loop para desenhar cada produto na telas
+  // Loop para desenhar cada produto na tela
   produtos.forEach((item) => {
     // Cria a máscara de moeda Brasileira
     let precoFormatado = Number(item.preco).toLocaleString("pt-BR", {
@@ -33,9 +36,62 @@ async function carregarCatalogo() {
         <img src="${item.imagem_url}" width="150">
         <h3>${item.Nome}</h3>
         <p class="preco-destaque">${precoFormatado}</p>
+        <button onclick="adicionarAoCarrinho('${item.Nome}', ${item.preco})">
+                Adicionar ao Carrinho
+            </button>
     `;
     vitrine.appendChild(div);
   });
 }
 // Roda a função assim que o site abrir
 carregarCatalogo();
+
+// 1. ADICIONAR ITEM
+function adicionarAoCarrinho(Nome, preco) {
+  const item = { Nome, preco };
+  carrinho.push(item); // Adiciona na lista
+  atualizarCarrinho(); // Atualiza a tela
+}
+
+// 2. ATUALIZAR A TELA E O LOCALSTORAGE
+function atualizarCarrinho() {
+  const listaHtml = document.getElementById("lista-carrinho");
+  const totalHtml = document.getElementById("valor-total");
+
+  listaHtml.innerHTML = ""; // Limpa a lista visual
+  let somaTotal = 0;
+
+  carrinho.forEach((item, index) => {
+    somaTotal += item.preco;
+    listaHtml.innerHTML += `
+      <li>
+        ${item.Nome} - R$ ${item.preco.toFixed(2)} 
+        <button onclick="removerItem(${index})">❌</button>
+      </li>
+    `;
+  });
+
+  // Atualiza o valor total na tela
+  totalHtml.innerText = somaTotal.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  // SALVA A LISTA NO NAVEGADOR (LocalStorage)
+  localStorage.setItem("meu_carrinho", JSON.stringify(carrinho));
+}
+
+// 3. FUNÇÃO PARA REMOVER ITEM
+function removerItem(index) {
+  carrinho.splice(index, 1); // Remove o item específico
+  atualizarCarrinho(); // Atualiza a tela
+}
+
+// 4. LIMPAR TUDO
+function esvaziarCarrinho() {
+  carrinho = [];
+  atualizarCarrinho();
+}
+
+// Inicializa o carrinho ao carregar a página
+atualizarCarrinho();
